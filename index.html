@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MusicHub | ร้านขายอุปกรณ์เครื่องดนตรี</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, "Tahoma", sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .cart {
+            background: #d4af37;
+            color: #111;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 500px;
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1600&q=80")
+                center/cover;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #111;
+            padding: 14px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+            max-width: 700px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 60px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* ================= CATEGORY ================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            color: #777;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: bold;
+            color: #b28b00;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            border: none;
+            background: #111;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .buy-btn:hover {
+            background: #d4af37;
+            color: #111;
+        }
+
+        /* ================= PROMOTION ================= */
+
+        .promotion {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .promotion h2 {
+            font-size: 35px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .promotion p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            background: white;
+            padding: 60px 7%;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-container h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            line-height: 2;
+            color: #555;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #0b0b0b;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer strong {
+            color: #d4af37;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .categories,
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .categories,
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 34px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        🎵 MusicHub
+    </div>
+
+    <nav>
+        <a href="#home">หน้าแรก</a>
+        <a href="#categories">หมวดหมู่</a>
+        <a href="#products">สินค้า</a>
+        <a href="#promotion">โปรโมชั่น</a>
+        <a href="#contact">ติดต่อเรา</a>
+    </nav>
+
+    <div class="cart" onclick="showCart()">
+        🛒 ตะกร้า <span id="cartCount">0</span>
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>MusicHub</h1>
+
+        <p>
+            ร้านขายเครื่องดนตรีและอุปกรณ์ดนตรีคุณภาพ
+            สำหรับมือใหม่และมืออาชีพ
+        </p>
+
+        <a href="#products" class="btn">
+            🛍️ เลือกซื้อสินค้า
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 ค้นหาเครื่องดนตรี เช่น กีตาร์, เปียโน, กลอง..."
+        onkeyup="searchProduct()"
+    >
+
+</div>
+
+
+<!-- ================= CATEGORY ================= -->
+
+<section class="section" id="categories">
+
+    <div class="section-title">
+
+        <h2>หมวดหมู่สินค้า</h2>
+
+        <p>
+            เลือกอุปกรณ์เครื่องดนตรีที่คุณต้องการ
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+        <div class="category">
+
+            <div class="category-icon">🎸</div>
+
+            <h3>กีตาร์</h3>
+
+            <p>
+                กีตาร์โปร่ง กีตาร์ไฟฟ้า และอุปกรณ์เสริม
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🎹</div>
+
+            <h3>คีย์บอร์ด</h3>
+
+            <p>
+                เปียโนไฟฟ้า คีย์บอร์ด และ MIDI
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🥁</div>
+
+            <h3>กลอง</h3>
+
+            <p>
+                กลองชุด กลองไฟฟ้า และอุปกรณ์กลอง
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🎤</div>
+
+            <h3>เครื่องเสียง</h3>
+
+            <p>
+                ไมโครโฟน ลำโพง มิกเซอร์ และสายสัญญาณ
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="section" id="products">
+
+    <div class="section-title">
+
+        <h2>สินค้าแนะนำ</h2>
+
+        <p>
+            สินค้าขายดีและสินค้าที่ได้รับความนิยม
+        </p>
+
+    </div>
+
+
+    <div class="products" id="productList">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1525201548942-d8732f6617a0?auto=format&fit=crop&w=800&q=80"
+                alt="กีตาร์โปร่ง"
+            >
+
+            <div class="product-info">
+
+                <h3>กีตาร์โปร่ง Acoustic</h3>
+
+                <p>
+                    กีตาร์โปร่งสำหรับมือใหม่
+                    เสียงใส เล่นง่าย
+                </p>
+
+                <div class="price">
+                    ฿3,990
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('กีตาร์โปร่ง Acoustic', 3990)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&w=800&q=80"
+                alt="กีตาร์ไฟฟ้า"
+            >
+
+            <div class="product-info">
+
+                <h3>กีตาร์ไฟฟ้า Electric</h3>
+
+                <p>
+                    กีตาร์ไฟฟ้าสำหรับผู้เริ่มต้น
+                    และนักดนตรีทั่วไป
+                </p>
+
+                <div class="price">
+                    ฿7,990
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('กีตาร์ไฟฟ้า Electric', 7990)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=800&q=80"
+                alt="เปียโนไฟฟ้า"
+            >
+
+            <div class="product-info">
+
+                <h3>Digital Piano</h3>
+
+                <p>
+                    เปียโนไฟฟ้าคุณภาพดี
+                    เหมาะสำหรับฝึกซ้อมที่บ้าน
+                </p>
+
+                <div class="price">
+                    ฿12,900
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('Digital Piano', 12900)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1543443258-6e6e6e6f3a6a?auto=format&fit=crop&w=800&q=80"
+                alt="กลองชุด"
+            >
+
+            <div class="product-info">
+
+                <h3>กลองชุด Drum Set</h3>
+
+                <p>
+                    กลองชุดสำหรับห้องซ้อม
+                    และการแสดงสด
+                </p>
+
+                <div class="price">
+                    ฿18,900
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('กลองชุด Drum Set', 18900)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=800&q=80"
+                alt="ไมโครโฟน"
+            >
+
+            <div class="product-info">
+
+                <h3>Studio Microphone</h3>
+
+                <p>
+                    ไมโครโฟนสำหรับบันทึกเสียง
+                    และทำเพลง
+                </p>
+
+                <div class="price">
+                    ฿2,590
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('Studio Microphone', 2590)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product">
+
+            <img
+                src="https://images.unsplash.com/photo-1598653222000-6b7b7a7c7c7c?auto=format&fit=crop&w=800&q=80"
+                alt="หูฟัง"
+            >
+
+            <div class="product-info">
+
+                <h3>Studio Headphones</h3>
+
+                <p>
+                    หูฟังสำหรับมิกซ์เสียง
+                    และฟังเพลง
+                </p>
+
+                <div class="price">
+                    ฿1,990
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="addToCart('Studio Headphones', 1990)"
+                >
+                    🛒 เพิ่มลงตะกร้า
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROMOTION ================= -->
+
+<section class="promotion" id="promotion">
+
+    <h2>🔥 โปรโมชั่นพิเศษ</h2>
+
+    <p>
+        ซื้อเครื่องดนตรีวันนี้ รับส่วนลดสูงสุด 20%
+    </p>
+
+    <a href="#products" class="btn">
+        ดูสินค้าทั้งหมด
+    </a>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <div class="contact-container">
+
+        <h2>ติดต่อเรา</h2>
+
+        <div class="contact-info">
+
+            📍 ที่อยู่: 123 ถนนดนตรี กรุงเทพฯ<br>
+
+            ☎️ โทร: 02-123-4567<br>
+
+            📧 Email: musichub@example.com<br>
+
+            📱 Facebook: MusicHub Thailand<br>
+
+            🕐 เปิดทุกวัน 10:00 - 20:00 น.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>MusicHub</strong>
+        ร้านขายอุปกรณ์เครื่องดนตรี
+    </p>
+
+    <p>
+        Guitar • Piano • Drum • Microphone • Accessories
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    let cart = [];
+    let cartCount = 0;
+
+
+    // เพิ่มสินค้าเข้าตะกร้า
+
+    function addToCart(productName, price) {
+
+        cart.push({
+            name: productName,
+            price: price
+        });
+
+        cartCount++;
+
+        document.getElementById("cartCount").innerText = cartCount;
+
+        alert(
+            "เพิ่ม " + productName +
+            " ลงในตะกร้าแล้ว"
+        );
+    }
+
+
+    // แสดงตะกร้า
+
+    function showCart() {
+
+        if (cart.length === 0) {
+
+            alert("ยังไม่มีสินค้าในตะกร้า");
+
+            return;
+        }
+
+        let message = "🛒 สินค้าในตะกร้า\n\n";
+
+        let total = 0;
+
+        cart.forEach(function(item, index) {
+
+            message +=
+                (index + 1) +
+                ". " +
+                item.name +
+                " - ฿" +
+                item.price.toLocaleString() +
+                "\n";
+
+            total += item.price;
+
+        });
+
+        message +=
+            "\nรวมทั้งหมด: ฿" +
+            total.toLocaleString();
+
+        alert(message);
+    }
+
+
+    // ระบบค้นหาสินค้า
+
+    function searchProduct() {
+
+        let input =
+            document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        let products =
+            document
+            .querySelectorAll(".product");
+
+        products.forEach(function(product) {
+
+            let name =
+                product
+                .querySelector("h3")
+                .innerText
+                .toLowerCase();
+
+            if (name.includes(input)) {
+
+                product.style.display = "block";
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
